@@ -1,0 +1,109 @@
+<div class="notebook">
+
+<div class="nb-cell markdown" name="md1">
+Exercise  1.4 Represent the following in Prolog:
+
+- Butch is a killer.
+- Mia and Marsellus are married.
+- Zed is dead.
+- Marsellus kills everyone who gives Mia a footmassage.
+- Mia loves everyone who is a good dancer.
+- Jules eats anything that is nutritious or tasty.
+</div>
+
+<div class="nb-cell program" name="p1">
+married(mia, marsellus).
+gives_foot_massage(zed, mia).
+
+killer(butch).
+killer(marsellus) :-
+	killed(marsellus, X).
+killed(marsellus, X):-
+    gives_foot_massage(X,mia).
+dead(zed).
+dead(X):- 
+    killed(Y, X).
+
+good_dancer(stacy).
+loves(mia, X) :- 
+    good_dancer(X).
+
+nutritious(apple).
+nutritious(broccoli).
+tasty(apple).
+tasty(pizza).
+eats(jules, X) :-
+    tasty(X);
+    nutritious(X).
+</div>
+
+<div class="nb-cell program" name="p3">
+descend(X,Y)  :-  child(X,Y). 
+descend(X,Y)  :-  
+    descend(X,Z), 
+    descend(Z,Y).
+
+child(anne,bridget). 
+child(bridget,caroline). 
+child(caroline,donna). 
+child(donna,emily). 
+
+%% ?- descend(emily, donna). will not terminate
+</div>
+
+<div class="nb-cell program" name="p2">
+directlyIn(irina, natasha).
+directlyIn(natasha, olga).
+directlyIn(olga, katarina).
+
+in(X, Y):- directlyIn(X, Y).
+in(X, Y):- 
+    directlyIn(X, Z),
+    in(Z, Y).
+</div>
+
+<div class="nb-cell program" name="p4">
+directTrain(saarbruecken,dudweiler). 
+directTrain(forbach,saarbruecken). 
+directTrain(freyming,forbach). 
+directTrain(stAvold,freyming). 
+directTrain(fahlquemont,stAvold). 
+directTrain(metz,fahlquemont). 
+directTrain(nancy,metz).
+
+travelFromTo(X, Y):- directTrain(X,Y).
+travelFromTo(X, Y):-
+    directTrain(X,Z),
+    travelFromTo(Z,Y).
+</div>
+
+<div class="nb-cell program" name="p5">
+%% successor
+succ(_).
+%% Defining the natural numbers
+numeral(0). 
+numeral(succ(X)):-
+    numeral(X).
+
+%% Returns the greater among the first 2 args in the 3rd
+greater_than(0, succ(X), succ(X)).
+greater_than(succ(X), 0, succ(X)).
+greater_than(succ(X), succ(Y), succ(Z)):-
+    greater_than(X, Y, Z).
+
+</div>
+
+<div class="nb-cell program" name="p6">
+%% Mirror image of a binary tree
+swap(leaf(X), leaf(X)).
+swap(tree(X,Y), tree(A,B)):-
+    swap(X,B),
+    swap(Y,A).
+
+</div>
+
+<div class="nb-cell html" name="htm1">
+.
+</div>
+
+</div>
